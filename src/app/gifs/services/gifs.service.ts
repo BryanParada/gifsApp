@@ -8,13 +8,19 @@ export class GifsService {
   private _historial: string [] = [ ];
 
   get historial() {
-    return [...this._historial];
+        return [...this._historial];
   }
 
-  buscarGifs( query: string ){
+  buscarGifs( query: string = '' ){
 
-    this._historial.unshift( query ); //insertar al inicio
-
+    query = query.trim().toLowerCase();
+     
+    //si no existe lo insertamos
+    if( !this._historial.includes(query)){
+      this._historial.unshift( query ); //insertar al inicio
+      this._historial = this._historial.splice(0,10); //maximo 10
+    }
+ 
     console.log(this._historial);
     
 
